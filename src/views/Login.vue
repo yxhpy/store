@@ -4,7 +4,7 @@
       <img src="../assets/logo.png" alt="Logo" class="logo">
       <h1>校园外卖</h1>
     </div>
-    <van-form @submit.prevent="onSubmit" class="login-form">
+    <van-form @submit="onSubmit" class="login-form">
       <van-cell-group inset>
         <van-field
           v-model="username"
