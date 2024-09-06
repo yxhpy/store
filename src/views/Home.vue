@@ -92,6 +92,7 @@ const quickActions = ref([
   { icon: 'coupon-o', text: '优惠券', link: '/coupons', bgColor: '#E6F7FF', iconColor: '#1890FF' },
   { icon: 'clock-o', text: '限时抢购', link: '/flash-sale', bgColor: '#FFF7E6', iconColor: '#FFA940' },
   { icon: 'like-o', text: '我的收藏', link: '/favorites', bgColor: '#F6FFED', iconColor: '#52C41A' },
+  { icon: 'new-arrival-o', text: '新品上市', link: '/new-products', bgColor: '#E6FFFB', iconColor: '#13C2C2' },
 ])
 const recommendedItems = ref(homeMockData.recommendedItems)
 const promotions = ref(homeMockData.promotions)

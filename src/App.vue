@@ -1,23 +1,29 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <van-tabbar v-model="active" class="custom-tabbar" @change="onTabChange">
-      <van-tabbar-item v-for="(item, index) in tabbarItems" :key="index" :icon="item.icon" :to="item.to" :badge="item.to === '/cart' ? cartItemCount : ''">
-        {{ item.text }}
-      </van-tabbar-item>
-    </van-tabbar>
+    <Splash v-if="showSplash" />
+    <template v-else>
+      <router-view></router-view>
+      <van-tabbar v-model="active" class="custom-tabbar" @change="onTabChange" v-if="showTabbar">
+        <van-tabbar-item v-for="(item, index) in tabbarItems" :key="index" :icon="item.icon" :to="item.to" :badge="item.to === '/cart' ? cartItemCount : ''">
+          {{ item.text }}
+        </van-tabbar-item>
+      </van-tabbar>
+    </template>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCartStore } from './store/cart'
+import Splash from './components/Splash.vue'
 
 const router = useRouter()
 const route = useRoute()
 const active = ref(0)
 const cartStore = useCartStore()
+const showSplash = ref(true)
+const showTabbar = ref(true)
 
 const cartItemCount = computed(() => cartStore.totalItems || '')
 
@@ -46,6 +52,15 @@ watch(() => route.path, (newPath) => {
   if (index !== -1) {
     active.value = index
   }
+  // 在登录、注册和忘记密码页面隐藏底部导航栏
+  showTabbar.value = !['/login', '/register', '/forgot-password'].includes(newPath)
+})
+
+onMounted(() => {
+  // 模拟启动动画
+  setTimeout(() => {
+    showSplash.value = false
+  }, 3000)
 })
 </script>
 
