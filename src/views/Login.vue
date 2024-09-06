@@ -34,7 +34,7 @@
         <div class="forgot-password">
           <span @click="goToForgotPassword">忘记密码？</span>
         </div>
-        <van-button round block type="primary" native-type="submit" class="submit-btn">
+        <van-button round block type="primary" native-type="submit" class="submit-btn" @click="onSubmit">
           登录
         </van-button>
       </div>
